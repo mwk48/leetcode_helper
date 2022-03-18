@@ -1,9 +1,9 @@
 name: Regular
 on:
   pull_request:
-  push: { branches: [main] }
+  push: { branches: [main, testing] }
   schedule:
-    - cron:  '0 1 * * *'
+    - cron:  '0 4 * * *'
   workflow_dispatch:
   
 jobs:
