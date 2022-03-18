@@ -18,7 +18,8 @@ const insert = async () => {
     const skip = await Question.countDocuments({}).exec();
     const result = await helper(1, skip);
     const questions = result["data"]["problemsetQuestionList"]["questions"];
-    if (questions.length===0 || parseInt(questions[0]["frontendQuestionId"])>=skip) {
+    console.log(result, skip, questions.length)
+    if (questions.length===0) {
       return false;
     }
     let count=0;
