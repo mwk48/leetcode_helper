@@ -2,6 +2,7 @@ import express from "express";
 import config from "./utils/config.js";
 import cors from "cors";
 import mongoose from "mongoose";
+import questionRouter from "./controllers/questions.js";
 
 const app = express();
 
@@ -17,8 +18,13 @@ console.log(config.MONGODB_URI);
     }
   })()
 
+
+app.use("/api/questions", questionRouter);
+
 app.use(cors());
 app.use(express.static("build"));
 app.use(express.json());
+
+
 
 export default app;

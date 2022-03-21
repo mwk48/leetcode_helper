@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import helper from "./fetchData.js";
-import Last from "./models/last.js";
 import Question from "./models/question.js";
 import config from "./utils/config.js";
 import toQuestion from "./utils/transformData.js";

@@ -1,5 +1,8 @@
 import mongoose from "mongoose";
 import mongooseUniqueValidator from "mongoose-unique-validator";
+import sequence from "mongoose-sequence"
+
+const AutoIncrement = sequence(mongoose);
 
 const questionSchema = new mongoose.Schema({
     id: {
@@ -23,6 +26,7 @@ questionSchema.set("toJSON", {
     }
 });
 
+questionSchema.plugin(AutoIncrement, {inc_field: 'questionId'});
 questionSchema.plugin(mongooseUniqueValidator);
 
 const question = mongoose.model("Question", questionSchema);

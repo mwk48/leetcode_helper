@@ -11,6 +11,7 @@ const api = supertest(app);
 beforeEach( async () => {
     await Question.deleteMany({});
     await Last.deleteMany({});
+    await Question.counterReset("questionId", () => {});
     const result = await helper(10, 0);
     const questions = result["data"]["problemsetQuestionList"]["questions"]
     for (let question of questions) {
@@ -21,6 +22,7 @@ beforeEach( async () => {
     const L = new Last({last: number});
     await L.save();
 }, 30000);
+
 test("insert correct number of data", async () => {
     const questions = await Question.countDocuments({}).exec();
     expect(questions).toBe(10);
@@ -49,6 +51,14 @@ test("skiping data correctly", async () => {
     expect(questions).toHaveLength(5);
     expect(questions[0]["frontendQuestionId"]).toBe("11");
 })
+
+test("questionId generated correctly", async () => {
+    const number = await Question.countDocuments({}).exec();
+    const questions = await Question.find({});
+    const ids = questions.map(q => q["questionId"]);
+    expect(ids).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+})
+ 
 
 afterAll(async () => {
     await mongoose.connection.close();
