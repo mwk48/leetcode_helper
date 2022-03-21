@@ -1,4 +1,5 @@
 import express from "express";
+import mongoose from "mongoose";
 import Question from "../models/question.js"
 
 const questionRouter = express.Router();
@@ -14,6 +15,9 @@ questionRouter.get("/qid/:id", async (req, res) => {
 });
 
 questionRouter.get("/dbid/:id", async (req, res) => {
+    if (!mongoose.isValidObjectId(req.params.id)) {
+        return res.status(400).json({ error: "malformatted id" });
+    }
     const course= await Question.findById(req.params.id);
     if (course) {
         res.json(course);
