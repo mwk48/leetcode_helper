@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import mongooseUniqueValidator from "mongoose-unique-validator";
-import sequence from "mongoose-sequence"
+import sequence from "mongoose-sequence";
+import mongoosePaginate from "mongoose-paginate-v2";
 
 const AutoIncrement = sequence(mongoose);
 
@@ -28,7 +29,8 @@ questionSchema.set("toJSON", {
 
 questionSchema.plugin(AutoIncrement, {inc_field: 'questionId'});
 questionSchema.plugin(mongooseUniqueValidator);
+questionSchema.plugin(mongoosePaginate);
 
 const question = mongoose.model("Question", questionSchema);
-
+question.paginate().then({});
 export default question;

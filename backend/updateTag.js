@@ -15,36 +15,24 @@ import Tag from "./models/tag.js";
   })()
 
 const insert = async () => {
-    const skip = await Question.countDocuments({}).exec();
-    const result = await helper(1, skip);
-    const questions = result["data"]["problemsetQuestionList"]["questions"];
-    console.log(result, skip, questions.length)
-    if (questions.length===0) {
-      return false;
-    }
+    const questions = await Question.find({});
     let count=0;
     for (let question of questions) {
-        count+=1;
-        const Q = new Question(toQuestion(question));
-        await Tag.findOneAndUpdate({}, {$addToSet: {tags: {$each: Q.tags}}}, {upsert: true});
-        await Q.save();
-        if (count%100===0) {
-          console.log(count);
+        await Tag.findOneAndUpdate({}, {$addToSet: {tags: {$each: question.tags}}}, {upsert: true});
+        if (count++%100===0) {
+            console.log(count);
         }
     }
-    return count>0;
+    return false;
 }
 
 (async () => {
   while (1) {
     const count =await insert();
-    console.log(count);
     if (!count) {
-      mongoose.disconnect();
-      break;
+        console.log("disconnected");
+        mongoose.disconnect();
+        break;
     }
   }
 })()
-
-
-

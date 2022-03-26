@@ -1,8 +1,10 @@
 import express from "express";
 import mongoose from "mongoose";
 import Question from "../models/question.js"
+import parse from "../utils/parseQuery.js";
 
 const questionRouter = express.Router();
+
 
 questionRouter.get("/qid/:id", async (req, res) => {
     const number = Number(req.params.id);
@@ -26,9 +28,26 @@ questionRouter.get("/dbid/:id", async (req, res) => {
     }
 });
 
+questionRouter.get("/count", async (req, res) => {
+    const result = await Question.countDocuments({}).exec();
+    res.json({count: result});
+});
+
 questionRouter.get("/", async (req, res) => {
-    const courses= await Question.find({});
-    res.json(courses);
+    let {option, query} = parse(req.query);
+    console.log(option, query);
+    /*
+    query = {
+        "tags" : { $all : ["Math", "Recursion"]},
+        "difficulty" : "Hard",
+        "acceptance": { $gt : 50},
+        "paid": !true
+    };
+    */
+    const result = await Question.paginate(query, option);
+    console.log(result);
+    res.json(result);
+    
 });
 
 
