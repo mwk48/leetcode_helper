@@ -1,6 +1,8 @@
 import React from "react";
-import { useReducer } from "react";
-
+import { useReducer, useEffect, useState, useContext } from "react";
+import apiClient from "./requests/client";
+import { useQuery } from "react-query";
+import { queryContext } from "./contexts/context";
 const initialState = {count : 0};
 
 const reducer = (state, action) => {
@@ -15,8 +17,35 @@ const reducer = (state, action) => {
       return state
   }
 }
-
 const App = () => {
+  const result = useContext(queryContext);
+  console.log(result);
+  const { isLoading, refetch } = useQuery(
+    "leetcode",
+    async () => {
+      return await apiClient.get("/questions?page=23");
+    },
+    {
+      enabled: false,
+      onSuccess: (res) => {
+        const result = {
+          status: res.status,
+          headers: res.headers,
+          data: res.data,
+        };
+        console.log(result);
+      },
+      onError: (err) => {
+        const error = err.response?.data || err;
+        console.log(error);
+      },
+    }
+  );
+  useEffect(() => {
+    if (isLoading) {
+      console.log("Loading");
+    }
+  }, [isLoading]);
   const [state, dispatch] = useReducer(reducer, initialState);
   return (
     <div>
@@ -25,6 +54,7 @@ const App = () => {
       <button onClick={() => dispatch({type: "INCREMENT"})}>increase</button>
       <button onClick={() => dispatch({type: "DECREMENT"})}>decrease</button>
       <button onClick={() => dispatch({type: "ZERO"})}>zero</button>
+      <button onClick={() => refetch()}>testing</button>
     </div>
   )
 }
