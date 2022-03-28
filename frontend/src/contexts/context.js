@@ -23,8 +23,8 @@ const Provider = ({ children }) => {
         changeDifficulty: (difficulty) => {
             dispatch({ type: "DIFFICULTY", data: difficulty });
         },
-        changePaid: (difficulty) => {
-            dispatch({ type: "PAID", data: difficulty });
+        changePaid: (paid) => {
+            dispatch({ type: "PAID", data: paid });
         },
         clearAll: () => {
             dispatch({ type: "CLEAR"});

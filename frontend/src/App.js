@@ -3,6 +3,7 @@ import { useReducer, useEffect, useState, useContext } from "react";
 import apiClient from "./requests/client";
 import { useQuery } from "react-query";
 import { queryContext } from "./contexts/context";
+
 const initialState = {count : 0};
 
 const reducer = (state, action) => {
@@ -41,6 +42,14 @@ const App = () => {
       },
     }
   );
+  const tagQuery = useQuery('tags', 
+    async () => {
+      return await apiClient.get("/tags");
+    }, {
+      onSuccess: (res) => {
+        console.log(res);
+      }
+    })
   useEffect(() => {
     if (isLoading) {
       console.log("Loading");
