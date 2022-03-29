@@ -1,4 +1,4 @@
-import fetch from 'node-fetch';
+import fetch from "node-fetch";
 
 const request = async (limit, skip) => {
 
@@ -31,33 +31,33 @@ const request = async (limit, skip) => {
         }
       }
     }
-`
+`;
 
     const variables = {
-      "categorySlug": "",
-      "skip": skip,
-      "limit": limit,
-      "filters": {}
-    }
+        "categorySlug": "",
+        "skip": skip,
+        "limit": limit,
+        "filters": {}
+    };
 
     try {
-      const response = await fetch('https://leetcode.com/graphql', {
-    method: 'post',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({query, variables})
-    })
-      const result = await response.json()
-      return result
+        const response = await fetch("https://leetcode.com/graphql", {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({query, variables})
+        });
+        const result = await response.json();
+        return result;
     } catch (e) {
-      console.log(e)
+        console.log(e);
     }
-}
+};
 
 const helper = async (limit=100, skip=0) => {
-  const res = await request(limit, skip)
-  return res
-}
+    const res = await request(limit, skip);
+    return res;
+};
 
-export default helper
+export default helper;

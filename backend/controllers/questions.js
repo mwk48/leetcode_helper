@@ -1,6 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
-import Question from "../models/question.js"
+import Question from "../models/question.js";
 import parse from "../utils/parseQuery.js";
 
 const questionRouter = express.Router();

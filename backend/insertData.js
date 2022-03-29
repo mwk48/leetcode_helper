@@ -7,20 +7,20 @@ import Tag from "./models/tag.js";
 
 (async () => {
     try {
-      await mongoose.connect(config.MONGODB_URI);
-      console.log("connected to MongoDB");
+        await mongoose.connect(config.MONGODB_URI);
+        console.log("connected to MongoDB");
     } catch (err) {
-      console.log('error: ' + err.message);
+        console.log("error: " + err.message);
     }
-  })()
+})();
 
 const insert = async () => {
     const skip = await Question.countDocuments({}).exec();
     const result = await helper(1, skip);
     const questions = result["data"]["problemsetQuestionList"]["questions"];
-    console.log(result, skip, questions.length)
+    console.log(result, skip, questions.length);
     if (questions.length===0) {
-      return false;
+        return false;
     }
     let count=0;
     for (let question of questions) {
@@ -29,22 +29,22 @@ const insert = async () => {
         await Tag.findOneAndUpdate({}, {$addToSet: {tags: {$each: Q.tags}}}, {upsert: true});
         await Q.save();
         if (count%100===0) {
-          console.log(count);
+            console.log(count);
         }
     }
     return count>0;
-}
+};
 
 (async () => {
-  while (1) {
-    const count =await insert();
-    console.log(count);
-    if (!count) {
-      mongoose.disconnect();
-      break;
+    for (;;) {
+        const count =await insert();
+        console.log(count);
+        if (!count) {
+            mongoose.disconnect();
+            break;
+        }
     }
-  }
-})()
+})();
 
 
 

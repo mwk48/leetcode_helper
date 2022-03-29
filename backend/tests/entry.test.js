@@ -15,7 +15,7 @@ beforeEach( async () => {
     await Tag.deleteMany({});
     await Question.counterReset("questionId", () => {});
     const result = await helper(10, 0);
-    const questions = result["data"]["problemsetQuestionList"]["questions"]
+    const questions = result["data"]["problemsetQuestionList"]["questions"];
     for (let question of questions) {
         const Q = new Question(toQuestion(question));
         await Tag.findOneAndUpdate({}, {$addToSet: {tags: {$each: Q.tags}}}, {upsert: true});
@@ -54,14 +54,14 @@ test("skiping data correctly", async () => {
     const questions = query["data"]["problemsetQuestionList"]["questions"];
     expect(questions).toHaveLength(5);
     expect(questions[0]["frontendQuestionId"]).toBe("11");
-})
+});
 
 test("questionId generated correctly", async () => {
     const number = await Question.countDocuments({}).exec();
     const questions = await Question.find({});
     const ids = questions.map(q => q["questionId"]);
     expect(ids).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
-})
+});
  
 test("Tag test", async () => {
     const tagResult = await Tag.findOne({});
@@ -69,7 +69,7 @@ test("Tag test", async () => {
     expect(number).toBe(1);
     console.log(tagResult.tags);
     expect(tagResult.tags.length>0).toBeTruthy();
-})
+});
 
 afterAll(async () => {
     await mongoose.connection.close();

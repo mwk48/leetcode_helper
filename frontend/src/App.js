@@ -92,7 +92,7 @@ const App = () => {
   useEffect(() => {
     if (tagQuery.status === "success") {
        //console.log(tagQuery.data.data)
-       setTags(tagQuery.data.data.tags)
+       setTags(tagQuery.data.data.tags.sort((a, b) => a < b ? -1 : a > b ? 1 : 0));
     }
   }, [tagQuery])
   if (!tags || !items) {
@@ -108,6 +108,7 @@ const App = () => {
           onChange={handleChangeTags}
           input={<OutlinedInput label="Tag" />}
           renderValue={(selected) => selected.join(', ')}
+          MenuProps={{ PaperProps: { sx: { maxHeight: 500 } } }}
         >
           {tags.map((name) => (
             <MenuItem key={name} value={name}>

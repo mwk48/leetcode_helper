@@ -15,7 +15,7 @@ beforeEach( async () => {
     await Tag.deleteMany({});
     await Question.counterReset("questionId", () => {});
     const result = await helper(10, 0);
-    const questions = result["data"]["problemsetQuestionList"]["questions"]
+    const questions = result["data"]["problemsetQuestionList"]["questions"];
     for (let question of questions) {
         const Q = new Question(toQuestion(question));
         await Tag.findOneAndUpdate({}, {$addToSet: {tags: {$each: Q.tags}}}, {upsert: true});
@@ -46,7 +46,7 @@ test("query string", async () => {
     const questions = await api.get("/api/questions?tags=Recursion&difficulty=Hard&acceptance=20&page=1&limit=100&paid=false");
     const body = questions.body;
     expect(1).toBe(1);
-})
+});
 
 test("Tag test", async () => {
     const tagResult = await Tag.findOne({});
@@ -54,7 +54,7 @@ test("Tag test", async () => {
     expect(number).toBe(1);
     console.log(tagResult.tags);
     expect(tagResult.tags.length>0).toBeTruthy();
-})
+});
 
 afterAll(async () => {
     await mongoose.connection.close();

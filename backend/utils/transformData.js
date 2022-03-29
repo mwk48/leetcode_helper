@@ -6,7 +6,7 @@ const toQuestion = (obj) => {
         acceptance: obj["acRate"], 
         title: obj["title"],
         paid: obj["paidOnly"]
-    }
-}
+    };
+};
 
 export default toQuestion;

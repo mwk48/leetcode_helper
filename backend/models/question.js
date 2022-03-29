@@ -27,7 +27,7 @@ questionSchema.set("toJSON", {
     }
 });
 
-questionSchema.plugin(AutoIncrement, {inc_field: 'questionId'});
+questionSchema.plugin(AutoIncrement, {inc_field: "questionId"});
 questionSchema.plugin(mongooseUniqueValidator);
 questionSchema.plugin(mongoosePaginate);
 

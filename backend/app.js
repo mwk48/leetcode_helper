@@ -12,12 +12,12 @@ console.log(config.MONGODB_URI);
 
 (async () => {
     try {
-      await mongoose.connect(config.MONGODB_URI);
-      console.log("connected to MongoDB");
+        await mongoose.connect(config.MONGODB_URI);
+        console.log("connected to MongoDB");
     } catch (err) {
-      console.log('error: ' + err.message);
+        console.log("error: " + err.message);
     }
-  })()
+})();
 
 
 app.use("/api/questions", questionRouter);

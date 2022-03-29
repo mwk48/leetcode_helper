@@ -1,5 +1,5 @@
 import express from "express";
-import Tag from "../models/tag.js"
+import Tag from "../models/tag.js";
 
 const tagRouter = express.Router();
 

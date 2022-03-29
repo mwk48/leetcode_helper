@@ -7,12 +7,12 @@ import Tag from "./models/tag.js";
 
 (async () => {
     try {
-      await mongoose.connect(config.MONGODB_URI);
-      console.log("connected to MongoDB");
+        await mongoose.connect(config.MONGODB_URI);
+        console.log("connected to MongoDB");
     } catch (err) {
-      console.log('error: ' + err.message);
+        console.log("error: " + err.message);
     }
-  })()
+})();
 
 const insert = async () => {
     const questions = await Question.find({});
@@ -24,15 +24,15 @@ const insert = async () => {
         }
     }
     return false;
-}
+};
 
 (async () => {
-  while (1) {
-    const count =await insert();
-    if (!count) {
-        console.log("disconnected");
-        mongoose.disconnect();
-        break;
+    for (;;) {
+        const count =await insert();
+        if (!count) {
+            console.log("disconnected");
+            mongoose.disconnect();
+            break;
+        }
     }
-  }
-})()
+})();

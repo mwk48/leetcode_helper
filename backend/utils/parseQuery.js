@@ -7,12 +7,12 @@ const parse = (requestQuery) => {
 
     };
     for (let [key, val] of Object.entries(requestQuery)) {
-        console.log(key, typeof val)
+        console.log(key, {type: typeof val, string: (typeof val)==="string"});
         if ((Array.isArray(val) || (typeof val)==="string") & val.length===0) {
             continue;
         }
         if (key==="tags") {
-            query[key] = Array.isArray(val) ? { $all : val} : { $all : [val] }
+            query[key] = Array.isArray(val) ? { $all : val} : { $all : [val] };
         } else if (key==="acceptance") {
             query[key] = { $gt : Number(val)};
         } else if (key==="page" || key==="limit") {
@@ -24,6 +24,6 @@ const parse = (requestQuery) => {
         }
     }
     return {option, query};
-}
+};
 
 export default parse;
