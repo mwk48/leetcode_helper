@@ -3,38 +3,32 @@ import { useReducer, useEffect, useState, useContext } from "react";
 import apiClient from "./requests/client";
 import { useQuery } from "react-query";
 import { queryContext } from "./contexts/context";
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import ListItemText from '@mui/material/ListItemText';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Checkbox from '@mui/material/Checkbox';
+import Box from '@mui/material/Box';
+import Slider from '@mui/material/Slider';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 
-const initialState = {count : 0};
-
-const reducer = (state, action) => {
-  switch (action.type) {
-    case "INCREMENT":
-      return {...state, count: state.count+1}
-    case "DECREMENT":
-      return {...state, count: state.count-1}
-    case "ZERO":
-      return {...state, count: 0}
-    default:
-      return state
-  }
-}
 const App = () => {
-  const result = useContext(queryContext);
-  console.log(result);
-  const { isLoading, refetch } = useQuery(
-    "leetcode",
+  const {changeTags, state, changeAcceptance, changeDifficulty, changePaid, clearAll} = useContext(queryContext);
+  const [tags, setTags] = useState(null);
+  const [items, setItems] = useState(null);
+  console.log(state);
+  console.log(items);
+  const { refetch: refetchQuery, data } = useQuery(
+    ["leetcode", state],
     async () => {
       return await apiClient.get("/questions?page=23");
     },
     {
-      enabled: false,
       onSuccess: (res) => {
-        const result = {
-          status: res.status,
-          headers: res.headers,
-          data: res.data,
-        };
-        console.log(result);
+        setItems(res.data);
       },
       onError: (err) => {
         const error = err.response?.data || err;
@@ -47,23 +41,89 @@ const App = () => {
       return await apiClient.get("/tags");
     }, {
       onSuccess: (res) => {
-        console.log(res);
+        setTags(res.data.tags.sort((a, b) => a < b ? -1 : a > b ? 1 : 0));
       }
     })
-  useEffect(() => {
-    if (isLoading) {
-      console.log("Loading");
-    }
-  }, [isLoading]);
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const handleChangeTags = (event) => {
+    changeTags(event.target.value)
+  };
+  const handleChangeAcceptance = (event) => {
+    changeAcceptance(event.target.value)
+  };
+  const handleChangeDifficulty = (event) => {
+    changeDifficulty(event.target.value)
+  };
+  const handleChangePaid = (event) => {
+    changePaid(event.target.value)
+  };
+  if (!tags) {
+    return (<div></div>)
+  }
   return (
     <div>
-      {"value: "}{state.count}
-      <br/>
-      <button onClick={() => dispatch({type: "INCREMENT"})}>increase</button>
-      <button onClick={() => dispatch({type: "DECREMENT"})}>decrease</button>
-      <button onClick={() => dispatch({type: "ZERO"})}>zero</button>
-      <button onClick={() => refetch()}>testing</button>
+     <FormControl sx={{ m: 1, width: 300 }}>
+        <InputLabel id="demo-multiple-checkbox-label">Tag</InputLabel>
+        <Select
+          labelId="demo-multiple-checkbox-label"
+          id="demo-multiple-checkbox"
+          multiple
+          value={state.tags}
+          onChange={handleChangeTags}
+          input={<OutlinedInput label="Tag" />}
+          renderValue={(selected) => selected.join(', ')}
+        >
+          {tags.map((name) => (
+            <MenuItem key={name} value={name}>
+              <Checkbox checked={state.tags.indexOf(name) > -1} />
+              <ListItemText primary={name} />
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+      <Typography gutterBottom>Acceptance</Typography>
+      <Box sx={{ width: 300 }}>
+        <Slider
+            aria-label="Always visible"
+            defaultValue={0}
+            step={1}
+            onChange={handleChangeAcceptance}
+            valueLabelDisplay="auto"
+          />
+      </Box>
+      <FormControl sx={{ m: 1, minWidth: 120 }}>
+        <InputLabel id="demo-simple-select-helper-label">Difficulty</InputLabel>
+        <Select
+          labelId="demo-simple-select-helper-label"
+          id="demo-simple-select-helper"
+          value={state.difficulty}
+          label="Difficulty"
+          onChange={handleChangeDifficulty}
+        >
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+          <MenuItem value={"Easy"}>Easy</MenuItem>
+          <MenuItem value={"Medium"}>Medium</MenuItem>
+          <MenuItem value={"Hard"}>Hard</MenuItem>
+        </Select>
+      </FormControl>
+      <FormControl sx={{ m: 1, minWidth: 120 }}>
+        <InputLabel id="demo-simple-select-helper-label">Paid</InputLabel>
+        <Select
+          labelId="demo-simple-select-helper-label"
+          id="demo-simple-select-helper"
+          value={state.paid}
+          label="Paid"
+          onChange={handleChangePaid}
+        >
+          <MenuItem value="">
+            <em>All</em>
+          </MenuItem>
+          <MenuItem value={"true"}>Free</MenuItem>
+          <MenuItem value={"false"}>Premium</MenuItem>
+        </Select>
+      </FormControl>
+      <Button variant="contained" onClick={() => clearAll()}>Clear</Button>
     </div>
   )
 }

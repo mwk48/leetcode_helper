@@ -1,6 +1,10 @@
 export const initialState = {
     page: 1,
-    limit: 100
+    limit: 100,
+    tags: [],
+    difficulty: "",
+    paid: "",
+    acceptance: 0
 }
 
 const reducer = (state = initialState, action) => {
