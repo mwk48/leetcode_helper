@@ -1,3 +1,4 @@
+import React from "react";
 import reducer from "../reducers/reducer";
 import { initialState } from "../reducers/reducer";
 import { createContext, useReducer } from "react";
@@ -27,10 +28,10 @@ const Provider = ({ children }) => {
             dispatch({ type: "PAID", data: paid });
         },
         clearAll: () => {
-            dispatch({ type: "CLEAR"});
+            dispatch({ type: "CLEAR" });
         },
     };
-  
+
     return (
         <queryContext.Provider value={value}>
             {children}
