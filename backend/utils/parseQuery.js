@@ -7,6 +7,10 @@ const parse = (requestQuery) => {
 
     };
     for (let [key, val] of Object.entries(requestQuery)) {
+        console.log(key, typeof val)
+        if ((Array.isArray(val) || (typeof val)==="string") & val.length===0) {
+            continue;
+        }
         if (key==="tags") {
             query[key] = Array.isArray(val) ? { $all : val} : { $all : [val] }
         } else if (key==="acceptance") {

@@ -14,22 +14,33 @@ import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
+import { QueryCache } from 'react-query'
 
 const App = () => {
-  const {changeTags, state, changeAcceptance, changeDifficulty, changePaid, clearAll} = useContext(queryContext);
+  const {changeTags, state, changeAcceptance, changeDifficulty, changePaid, clearAll, changePage, changeLimit} = useContext(queryContext);
   const [tags, setTags] = useState(null);
   const [items, setItems] = useState(null);
-  console.log(state);
-  console.log(items);
-  const { refetch: refetchQuery, data } = useQuery(
+  
+  const itemQuery = useQuery(
     ["leetcode", state],
     async () => {
-      return await apiClient.get("/questions?page=23");
+      return await apiClient.request({
+        url: "/questions",
+        method: 'get',
+        params: {
+          page: state.page,
+          limit: state.limit,
+          acceptance: state.acceptance,
+          tags: state.tags,
+          difficulty: state.difficulty,
+          paid: state.paid
+        },
+      })
     },
+    
     {
-      onSuccess: (res) => {
-        setItems(res.data);
-      },
       onError: (err) => {
         const error = err.response?.data || err;
         console.log(error);
@@ -41,31 +52,57 @@ const App = () => {
       return await apiClient.get("/tags");
     }, {
       onSuccess: (res) => {
-        setTags(res.data.tags.sort((a, b) => a < b ? -1 : a > b ? 1 : 0));
-      }
+        //setTags(res.data.tags.sort((a, b) => a < b ? -1 : a > b ? 1 : 0));
+      },
+      onError: (err) => {
+        const error = err.response?.data || err;
+        console.log(error);
+      },
     })
   const handleChangeTags = (event) => {
     changeTags(event.target.value)
+    changePage(1)
   };
   const handleChangeAcceptance = (event) => {
     changeAcceptance(event.target.value)
+    changePage(1)
   };
   const handleChangeDifficulty = (event) => {
     changeDifficulty(event.target.value)
+    changePage(1)
   };
   const handleChangePaid = (event) => {
     changePaid(event.target.value)
+    changePage(1)
   };
-  if (!tags) {
+  const handleChangePage  = (event, value) => {
+    //console.log(value, typeof value)
+    changePage(value);
+  };
+  const handleChangeLimit  = (event) => {
+    changeLimit(event.target.value)
+    changePage(1)
+  };
+  useEffect(() => {
+    if (itemQuery.status === "success") {
+      //console.log(itemQuery.data.data)
+      setItems(itemQuery.data.data)
+    }
+  }, [itemQuery])
+  useEffect(() => {
+    if (tagQuery.status === "success") {
+       //console.log(tagQuery.data.data)
+       setTags(tagQuery.data.data.tags)
+    }
+  }, [tagQuery])
+  if (!tags || !items) {
     return (<div></div>)
   }
   return (
     <div>
      <FormControl sx={{ m: 1, width: 300 }}>
-        <InputLabel id="demo-multiple-checkbox-label">Tag</InputLabel>
+        <InputLabel>Tag</InputLabel>
         <Select
-          labelId="demo-multiple-checkbox-label"
-          id="demo-multiple-checkbox"
           multiple
           value={state.tags}
           onChange={handleChangeTags}
@@ -91,39 +128,44 @@ const App = () => {
           />
       </Box>
       <FormControl sx={{ m: 1, minWidth: 120 }}>
-        <InputLabel id="demo-simple-select-helper-label">Difficulty</InputLabel>
+        <InputLabel>Difficulty</InputLabel>
         <Select
-          labelId="demo-simple-select-helper-label"
-          id="demo-simple-select-helper"
           value={state.difficulty}
           label="Difficulty"
           onChange={handleChangeDifficulty}
         >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
+          <MenuItem value={""}>None</MenuItem>
           <MenuItem value={"Easy"}>Easy</MenuItem>
           <MenuItem value={"Medium"}>Medium</MenuItem>
           <MenuItem value={"Hard"}>Hard</MenuItem>
         </Select>
       </FormControl>
       <FormControl sx={{ m: 1, minWidth: 120 }}>
-        <InputLabel id="demo-simple-select-helper-label">Paid</InputLabel>
+        <InputLabel>Paid</InputLabel>
         <Select
-          labelId="demo-simple-select-helper-label"
-          id="demo-simple-select-helper"
           value={state.paid}
           label="Paid"
           onChange={handleChangePaid}
         >
-          <MenuItem value="">
-            <em>All</em>
-          </MenuItem>
-          <MenuItem value={"true"}>Free</MenuItem>
-          <MenuItem value={"false"}>Premium</MenuItem>
+          <MenuItem value={""}>All</MenuItem>
+          <MenuItem value={"false"}>Free</MenuItem>
+          <MenuItem value={"true"}>Premium</MenuItem>
         </Select>
       </FormControl>
       <Button variant="contained" onClick={() => clearAll()}>Clear</Button>
+      <FormControl sx={{ m: 1, minWidth: 120 }}>
+        <Select
+          value={state.limit}
+          onChange={handleChangeLimit}
+        >
+        <MenuItem value={25}>25 / page</MenuItem>
+        <MenuItem value={50}>50 / page</MenuItem>
+        <MenuItem value={100}>100 / page</MenuItem>
+        </Select>
+      </FormControl>
+      <Stack spacing={2}>
+        <Pagination count={items.totalPages} onChange={handleChangePage} value={state.page}/>
+      </Stack>
     </div>
   )
 }

@@ -45,7 +45,7 @@ questionRouter.get("/", async (req, res) => {
     };
     */
     const result = await Question.paginate(query, option);
-    console.log(result);
+    //console.log(result);
     res.json(result);
     
 });

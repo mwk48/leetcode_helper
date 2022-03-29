@@ -13,7 +13,7 @@ const queryClient = new QueryClient({
       refetchOnmount: false,
       refetchOnReconnect: false,
       retry: false,
-      staleTime: twentyFourHoursInMs,
+      staleTime: twentyFourHoursInMs
     },
   },
 });
