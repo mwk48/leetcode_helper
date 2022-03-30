@@ -6,6 +6,7 @@ import Difficulty from "./options/Difficulty";
 import Clear from "./options/Clear";
 import Paid from "./options/Paid";
 import Tag from "./options/Tag";
+import Pick from "./options/Pick";
 
 const TopOption = memo(function TopOption({ tags }) {
     return (
@@ -19,6 +20,7 @@ const TopOption = memo(function TopOption({ tags }) {
             <Acceptance></Acceptance>
             <Difficulty></Difficulty>
             <Paid></Paid>
+            <Pick></Pick>
             <Clear></Clear>
         </Stack>
     );
