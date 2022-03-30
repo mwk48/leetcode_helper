@@ -5,7 +5,8 @@ const toQuestion = (obj) => {
         difficulty: obj["difficulty"],
         acceptance: obj["acRate"], 
         title: obj["title"],
-        paid: obj["paidOnly"]
+        paid: obj["paidOnly"],
+        url: "https://leetcode.com/problems/"+obj["titleSlug"]
     };
 };
 

@@ -47,6 +47,7 @@ test("expect correct data entry for first leetcode question", async () => {
     expect(firstQ["paid"]).not.toBeTruthy();
     expect(firstQ["tags"]).toContain("Array");
     expect(firstQ["tags"]).toContain("Hash Table");
+    expect(firstQ["url"]).toBe("https://leetcode.com/problems/two-sum/");
 });
 
 test("skiping data correctly", async () => {

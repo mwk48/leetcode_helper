@@ -16,7 +16,8 @@ const questionSchema = new mongoose.Schema({
     difficulty: String,
     acceptance: Number, 
     title: String,
-    paid: Boolean
+    paid: Boolean,
+    url: String
 });
 
 questionSchema.set("toJSON", {

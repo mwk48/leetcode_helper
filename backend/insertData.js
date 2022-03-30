@@ -36,6 +36,9 @@ const insert = async () => {
 };
 
 (async () => {
+    //await Question.deleteMany({});
+    //await Tag.deleteMany({});
+    //await Question.counterReset("questionId", () => {});
     for (;;) {
         const count =await insert();
         console.log(count);
