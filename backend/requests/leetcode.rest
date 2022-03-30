@@ -1,0 +1,4 @@
+GET http://localhost:3001/api/questions
+
+###
+GET http://localhost:3001/api/questions/ids

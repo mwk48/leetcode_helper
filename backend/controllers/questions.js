@@ -33,6 +33,13 @@ questionRouter.get("/count", async (req, res) => {
     res.json({count: result});
 });
 
+questionRouter.get("/ids", async (req, res) => {
+    let {option, query} = parse(req.query);
+    console.log(option, query);
+    const result = await Question.find(query, {questionId: 1, _id:0});
+    res.json(result);
+});
+
 questionRouter.get("/", async (req, res) => {
     let {option, query} = parse(req.query);
     console.log(option, query);

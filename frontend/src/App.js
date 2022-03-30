@@ -12,6 +12,7 @@ const App = () => {
     const { state } = useContext(queryContext);
     const [tags, setTags] = useState(null);
     const [items, setItems] = useState(null);
+    console.log(items);
     const itemQuery = useQuery(
         ["leetcode", state],
         async () => {
