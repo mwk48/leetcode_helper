@@ -75,7 +75,7 @@ const App = () => {
             direction="column"
             style={{ minHeight: "100vh", width: "90%", margin: "auto" }}
         >
-            <TopOption tags={tags}>
+            <TopOption tags={tags} >
             </TopOption>
             <TableView items={ items }>
             </TableView>
