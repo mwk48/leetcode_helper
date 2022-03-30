@@ -7,7 +7,7 @@ import { queryContext } from "../../contexts/context";
 
 
 const Acceptance = () => {
-    const { changeAcceptance, changePage } = useContext(queryContext);
+    const { state, changeAcceptance, changePage } = useContext(queryContext);
     const handleChangeAcceptance = (event) => {
         changeAcceptance(event.target.value);
         changePage(1);
@@ -19,6 +19,7 @@ const Acceptance = () => {
                 aria-label="Always visible"
                 defaultValue={0}
                 step={1}
+                value={state.acceptance}
                 onChange={handleChangeAcceptance}
                 valueLabelDisplay="auto"
             />

@@ -7,6 +7,7 @@ import Grid from "@mui/material/Grid";
 import TableView from "./components/TableView";
 import TopOption from "./components/TopOption";
 import BottomOption from "./components/BottomOption";
+
 const App = () => {
     const { state } = useContext(queryContext);
     const [tags, setTags] = useState(null);

@@ -18,12 +18,12 @@ const Tag = ({ tags }) => {
     };
     return (
         <FormControl sx={{ m: 1, width: "20%" }}>
-            <InputLabel>Tag</InputLabel>
+            <InputLabel>Tags</InputLabel>
             <Select
                 multiple
                 value={state.tags}
                 onChange={handleChangeTags}
-                input={<OutlinedInput label="Tag" />}
+                input={<OutlinedInput label="Tags" />}
                 renderValue={(selected) => selected.join(", ")}
                 MenuProps={{ PaperProps: { sx: { maxHeight: 500 } } }}
             >
