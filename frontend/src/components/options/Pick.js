@@ -28,7 +28,7 @@ const Pick = () => {
             manual: true,
             enabled: false
         });
-    const idQuery = useQuery("id",
+    const idQuery = useQuery(["id", id],
         async () => {
             console.log(id);
             return await apiClient.get(`/questions/qid/${id}`);

@@ -7,6 +7,9 @@ const questionRouter = express.Router();
 
 
 questionRouter.get("/qid/:id", async (req, res) => {
+    if (Number.isNaN(Number(req.params.id))) {
+        return res.status(400).json({ error: "Invalid question id" });
+    }
     const number = Number(req.params.id);
     const course= await Question.findOne({"questionId": number});
     if (course) {
@@ -24,7 +27,7 @@ questionRouter.get("/dbid/:id", async (req, res) => {
     if (course) {
         res.json(course);
     } else {
-        res.status(404).end();
+        res.status(404).json({ error: "Invalid question id" });
     }
 });
 

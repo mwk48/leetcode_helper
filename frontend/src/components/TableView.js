@@ -58,7 +58,9 @@ const TableView = memo(function TableView({ items }) {
         );
     };
     return (
-        <TableContainer component={Paper} >
+        <TableContainer component={Paper} sx={{ mb: 2, "&:last-child th, &:last-child td": {
+            borderBottom: 0,
+        } }}>
             <Table aria-label="collapsible table" size="small" >
                 <TableHead>
                     <TableRow>

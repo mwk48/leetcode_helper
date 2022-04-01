@@ -7,6 +7,10 @@ import Grid from "@mui/material/Grid";
 import TableView from "./components/TableView";
 import TopOption from "./components/TopOption";
 import BottomOption from "./components/BottomOption";
+import Navigation from "./components/Navigation";
+import { Routes, Route } from "react-router-dom";
+import Helper from "./components/Helper";
+import Info from "./components/Info";
 
 const App = () => {
     const { state } = useContext(queryContext);
@@ -70,18 +74,49 @@ const App = () => {
         return (<div></div>);
     }
     return (
+
         <Grid
             container
             spacing={0}
             direction="column"
             style={{ minHeight: "100vh", width: "90%", margin: "auto" }}
         >
-            <TopOption tags={tags} >
-            </TopOption>
-            <TableView items={ items }>
-            </TableView>
-            <BottomOption totalPage={items.totalPages}>
-            </BottomOption>
+
+            <Routes>
+                <Route path="/" element={
+                    <>
+                        <Navigation>
+                        </Navigation>
+                        <TopOption tags={tags} >
+                        </TopOption>
+                        <TableView items={ items }>
+                        </TableView>
+                        <BottomOption totalPage={items.totalPages}>
+                        </BottomOption>
+                    </>
+                } />
+                <Route path="/helper" element={
+                    <>
+                        <Navigation>
+                        </Navigation>
+                        <Helper>
+                        </Helper>
+                    </>
+                } />
+                <Route path="/about" element={
+                    <>
+                        <Navigation>
+                        </Navigation>
+                        <h1>2342345345</h1>
+                    </>
+                } />
+                <Route path="/info/:id" element={
+                    <>
+                        <Info>
+                        </Info>
+                    </>
+                } />
+            </Routes>
         </Grid>
         /*
         <Grid
@@ -190,4 +225,5 @@ const App = () => {
         */
     );
 };
+
 export default App;

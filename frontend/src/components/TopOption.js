@@ -15,6 +15,7 @@ const TopOption = memo(function TopOption({ tags }) {
             justifyContent="space-between"
             alignItems="center"
             spacing={1}
+            sx={{ mb: 2 }}
         >
             <Tag tags={tags}></Tag>
             <Acceptance></Acceptance>
