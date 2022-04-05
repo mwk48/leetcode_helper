@@ -11,6 +11,7 @@ import Navigation from "./components/Navigation";
 import { Routes, Route } from "react-router-dom";
 import Helper from "./components/Helper";
 import Info from "./components/Info";
+import About from "./components/About";
 
 const App = () => {
     const { state } = useContext(queryContext);
@@ -107,7 +108,8 @@ const App = () => {
                     <>
                         <Navigation>
                         </Navigation>
-                        <h1>2342345345</h1>
+                        <About>
+                        </About>
                     </>
                 } />
                 <Route path="/info/:id" element={
