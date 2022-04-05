@@ -4,6 +4,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import questionRouter from "./controllers/questions.js";
 import tagRouter from "./controllers/tags.js";
+import compression from "compression";
 
 const app = express();
 
@@ -23,6 +24,7 @@ console.log(config.MONGODB_URI);
 app.use("/api/questions", questionRouter);
 app.use("/api/tags", tagRouter);
 
+app.use(compression());
 app.use(cors());
 app.use(express.static("build"));
 app.use(express.json());
