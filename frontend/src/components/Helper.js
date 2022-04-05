@@ -16,10 +16,23 @@ const Helper = () => {
         error: () => {},
     });
 
+    const isInt = str => {
+        str = str.trim();
+        if (!str) {
+            return false;
+        }
+        str = str.replace(/^0+/, "") || "0";
+        var n = Math.floor(Number(str));
+        return n !== Infinity && String(n) === str && n >= 0;
+    };
     const introduction = "Enter leetcode question id below, and click the url below to access the question.";
     const [id, setId] = useState("1");
     const handleChangeId = (event) => {
-        setId(event.target.value);
+        if (isInt(event.target.value)) {
+            setId(parseInt(event.target.value).toString());
+        } else {
+            setId(event.target.value);
+        }
     };
     const helperQuery = useQuery(
         ["helper", id],
