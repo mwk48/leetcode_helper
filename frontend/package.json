@@ -21,7 +21,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest --env=jsdom",
     "eject": "react-scripts eject",
     "lint": "eslint .",
     "fixlint": "eslint . --fix"
@@ -44,5 +44,14 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:3001"
+  "proxy": "http://localhost:3001",
+  "devDependencies": {
+    "@babel/preset-react": "^7.16.7",
+    "@testing-library/jest-dom": "^5.16.1",
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/react-hooks": "^7.0.2",
+    "eslint-plugin-jest": "^25.7.0",
+    "jest": "^27.5.1",
+    "nock": "^13.2.4"
+  }
 }
