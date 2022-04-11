@@ -22,7 +22,7 @@ nock.enableNetConnect("127.0.0.1");
 
 test("axios test", async () => {
     console.log(window.location.href);
-    nock("http://localhost")
+    nock("http://localhost:3000")
         .get("/api/questions?page=1&limit=100&acceptance=0&difficulty=&paid=")
         .reply(200, {
             data: {

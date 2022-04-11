@@ -34,7 +34,6 @@ const App = () => {
                 },
             });
         },
-
         {
             onError: (err) => {
                 const error = err.response?.data || err;
@@ -65,9 +64,8 @@ const App = () => {
         }
     }, [itemQuery]);
     useEffect(() => {
-        console.log(tagQuery);
         if (tagQuery.status === "success") {
-            //console.log(tagQuery.data.data)
+            //console.log(tagQuery.data.data);
             setTags(tagQuery.data.data.tags.sort((a, b) => a < b ? -1 : a > b ? 1 : 0));
         }
     }, [tagQuery]);
