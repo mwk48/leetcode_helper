@@ -9,20 +9,23 @@ const Info = () => {
         async () => {
             return await apiClient.get(`/questions/qid/${id}`);
         }, {
-            manual: true,
-            enabled: false
+            onError: (err) => {
+                const error = err.response?.data || err;
+                console.log(error);
+            },
         });
     const [result, setResult] = useState(null);
     useEffect( async () => {
-        const response = await infoQuery.refetch();
-        delete response.data.data["id"];
-        setResult(response.data.data);
-    }, []);
+        if (infoQuery.status === "success") {
+            delete infoQuery.data.data["id"];
+            setResult(infoQuery.data.data);
+        }
+    }, [infoQuery]);
     if (result===null) {
         return null;
     }
     return (
-        <pre>
+        <pre data-testid="info-display">
             {JSON.stringify(result, null, 4)}
         </pre>
     );

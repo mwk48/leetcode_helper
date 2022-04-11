@@ -30,7 +30,7 @@ const Pick = () => {
         });
     const idQuery = useQuery(["id", id],
         async () => {
-            console.log(id);
+            //console.log(id);
             return await apiClient.get(`/questions/qid/${id}`);
         }, {
             manual: true,

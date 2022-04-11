@@ -27,13 +27,14 @@ const TableView = memo(function TableView({ items }) {
                             aria-label="expand row"
                             size="small"
                             onClick={() => setOpen(!open)}
+                            data-testid="show-tag"
                         >
                             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                         </IconButton>
                     </TableCell>
                     <TableCell component="th" scope="row">
                         <Link href={row.url} target="_blank" rel="noopener" style={{ textDecoration: "none" }}>
-                            {`${row.questionId}.${row.title}`}
+                            {`${row.questionId}. ${row.title}`}
                         </Link>
                     </TableCell>
                     <TableCell align="right">{row.acceptance.toFixed(1)}{"%"}</TableCell>

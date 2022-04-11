@@ -10,6 +10,7 @@
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.4.1",
     "axios": "^0.26.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -53,6 +54,7 @@
     "eslint-plugin-jest": "^25.7.0",
     "jest": "^27.5.1",
     "msw": "^0.39.2",
-    "nock": "^13.2.4"
+    "nock": "^13.2.4",
+    "react-select-event": "^5.5.0"
   }
 }

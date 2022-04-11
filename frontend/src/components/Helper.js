@@ -39,8 +39,6 @@ const Helper = () => {
         async () => {
             return await apiClient.get(`/questions/qid/${id}`);
         }, {
-            manual: true,
-            enabled: false,
             onError: (err) => {
                 const error = err.response?.data || err;
                 console.log(error);
@@ -50,10 +48,12 @@ const Helper = () => {
     useEffect( async () => {
         setUrl(null);
         const response = await helperQuery.refetch();
+        //console.log(response);
         if (response.status==="success") {
             setUrl(response.data.data.url);
         }
     }, [id]);
+    //console.log(id);
     return (
         <Fragment>
             <Typography variant="h6" component="div" sx={{ mb: 2 }}>

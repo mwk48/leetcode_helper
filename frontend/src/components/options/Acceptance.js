@@ -22,6 +22,7 @@ const Acceptance = () => {
                 value={state.acceptance}
                 onChange={handleChangeAcceptance}
                 valueLabelDisplay="auto"
+                data-testid="slider"
             />
         </Box>
     );

@@ -14,12 +14,14 @@ const Difficulty = () => {
         changePage(1);
     };
     return (
-        <FormControl sx={{ m: 1, width: "12%" }}>
+        <FormControl sx={{ m: 1, width: "12%" }} data-testid="scroll-difficulty">
             <InputLabel>Difficulty</InputLabel>
             <Select
                 value={state.difficulty}
                 label="Difficulty"
                 onChange={handleChangeDifficulty}
+                data-testid="choose-difficulty"
+                name="difficulty" inputid="difficulty"
             >
                 <MenuItem value={""}>None</MenuItem>
                 <MenuItem value={"Easy"}>Easy</MenuItem>
