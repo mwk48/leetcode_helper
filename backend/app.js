@@ -24,7 +24,6 @@ console.log(config.MONGODB_URI);
 app.use("/api/questions", questionRouter);
 app.use("/api/tags", tagRouter);
 
-app.use(compression());
 app.use(cors());
 app.use(express.static("build"));
 app.use(express.json());
