@@ -22,7 +22,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "jest --env=jsdom",
+    "test": "cross-env RTL_SKIP_AUTO_CLEANUP=true jest --env=jsdom",
     "eject": "react-scripts eject",
     "lint": "eslint .",
     "fixlint": "eslint . --fix"
@@ -51,6 +51,7 @@
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/react-hooks": "^7.0.2",
+    "cross-env": "^7.0.3",
     "eslint-plugin-jest": "^25.7.0",
     "jest": "^27.5.1",
     "msw": "^0.39.2",

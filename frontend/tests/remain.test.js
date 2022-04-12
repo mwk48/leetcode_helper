@@ -131,3 +131,4 @@ test("Non-query components (pick, clear, table) work", async () => {
     const headers = ["Title", "Acceptance", "Difficulty", "Premium"];
     expect(headers.every(h => tableHead.includes(h))).toBeTruthy();
 });
+
