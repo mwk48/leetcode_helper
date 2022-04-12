@@ -1,0 +1,7 @@
+docker build . -t leetcode_backend
+docker run -it --rm --name leetcode_backend --env-file='../.env' -p 3001:3001 -p 3000:3000 leetcode_backend
+
+docker build . -t leetcode_frontend
+docker run -it --rm --env-file='./.env' --network container:leetcode_backend leetcode_frontend
+
+docker-compose up

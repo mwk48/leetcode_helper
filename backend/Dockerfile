@@ -1,0 +1,19 @@
+FROM node:16
+
+ARG MONGODB_URI
+
+ARG TEST_MONGODB_URI
+
+ENV MONGODB_URI ${MONGODB_URI}
+
+ENV TEST_MONGODB_URI ${TEST_MONGODB_URI}
+
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+CMD ["npm", "start"]
