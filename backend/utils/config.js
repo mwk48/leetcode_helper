@@ -10,6 +10,7 @@ dotenv.config({ path: path.resolve(__dirname, "../../.env") });
 
 const PORT = process.env["PORT"] || 3001;
 
+console.log(process.env, process.env["PORT"], process.env["MONGODB_URI"], process.env["TEST_MONGODB_URI"]);
 const MONGODB_URI = process.env.NODE_ENV !== "test" 
     ? process.env["MONGODB_URI"] : process.env["TEST_MONGODB_URI"];
 
