@@ -10,6 +10,9 @@ jobs:
   regular:
     name: cron job for updating leetcode questions
     runs-on: ubuntu-latest
+    env:
+      MONGODB_URI: ${{ secrets.MONGODB_URI }}
+      TEST_MONGODB_URI: ${{ secrets.TEST_MONGODB_URI }}
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -24,6 +27,8 @@ jobs:
         echo TEST_MONGODB_URI=${{ secrets.TEST_MONGODB_URI }} >> .env
         echo PORT=${{ secrets.PORT }} >> .env
         cat .env
+        pwd
+        ls -a
     - name: npm install in backend
       working-directory: ./backend
       run: npm install
