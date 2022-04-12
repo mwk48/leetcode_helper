@@ -24,6 +24,8 @@ jobs:
         echo TEST_MONGODB_URI=${{ secrets.TEST_MONGODB_URI }} >> .env
         echo PORT=${{ secrets.PORT }} >> .env
         cat .env
+        pwd
+        ls -a
     - name: npm install in backend
       working-directory: ./backend
       run: npm install
