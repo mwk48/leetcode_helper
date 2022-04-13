@@ -15,7 +15,7 @@ questionRouter.get("/qid/:id", async (req, res) => {
     if (course) {
         res.json(course);
     } else {
-        res.status(404).end();
+        res.status(404).json({ error: "Invalid question id" });
     }
 });
 
@@ -27,7 +27,7 @@ questionRouter.get("/dbid/:id", async (req, res) => {
     if (course) {
         res.json(course);
     } else {
-        res.status(404).json({ error: "Invalid question id" });
+        res.status(404).json({ error: "Invalid id" });
     }
 });
 

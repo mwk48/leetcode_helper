@@ -9,7 +9,7 @@ import Tag from "../models/tag.js";
 
 const api = supertest(app);
 
-beforeEach( async () => {
+beforeAll( async () => {
     await Question.deleteMany({});
     await Last.deleteMany({});
     await Tag.deleteMany({});
@@ -47,7 +47,7 @@ test("expect correct data entry for first leetcode question", async () => {
     expect(firstQ["paid"]).not.toBeTruthy();
     expect(firstQ["tags"]).toContain("Array");
     expect(firstQ["tags"]).toContain("Hash Table");
-    expect(firstQ["url"]).toBe("https://leetcode.com/problems/two-sum/");
+    expect(firstQ["url"]).toBe("https://leetcode.com/problems/two-sum");
 });
 
 test("skiping data correctly", async () => {

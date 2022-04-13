@@ -9,7 +9,7 @@ import compression from "compression";
 const app = express();
 
 console.log("Connecting to MongoDB");
-console.log(config.MONGODB_URI);
+//console.log(config.MONGODB_URI);
 
 (async () => {
     try {
