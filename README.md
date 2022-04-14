@@ -1,6 +1,6 @@
 # Leetcode Helper
 
-This project provide a few features for improving user experience in Leetcode
+This project provide a few features for improving user experience in [Leetcode](https://leetcode.com/)
 
 - Provide an interactive frontend for different querying options, including some features that does not support by [Leetcode](https://leetcode.com/), such as acceptance filter and arrow button for displaying tags
 
