@@ -3,7 +3,7 @@ on:
   pull_request:
   push: { branches: [main, testing] }
   schedule:
-    - cron:  '0 4 * * *'
+    - cron:  '0 22 * * *'
   workflow_dispatch:
   
 jobs:
