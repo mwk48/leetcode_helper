@@ -2,7 +2,7 @@
 
 This project provide a few features for improving user experience in Leetcode
 
-- Provide an interactive frontend for different querying options, including some features that does not support by leetcode.com, such as acceptance filter and arrow button for displaying tags
+- Provide an interactive frontend for different querying options, including some features that does not support by [Leetcode](https://leetcode.com/), such as acceptance filter and arrow button for displaying tags
 
 - Be able to access detail of leetcode question by question id in JSON format and redirect to leetcode question page using question id
 
