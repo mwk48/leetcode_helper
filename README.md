@@ -15,7 +15,7 @@ This project provide a few features for improving user experience in [Leetcode](
 * [Mongoose](https://mongoosejs.com/) - backend database
 * [Express](https://expressjs.com/) - backend server
 * [Github Actions](https://github.com/features/actions) - CI/CD
-* [supertest](https://github.com/visionmedia/supertest) - Backend API test
+* [Supertest](https://github.com/visionmedia/supertest) - Backend API test
 * [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) - frontend test
 * [Jest](https://jestjs.io/) - frontend and backend test
 * [Docker](https://www.docker.com/) - deployment
