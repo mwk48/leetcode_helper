@@ -1,5 +1,7 @@
 # Leetcode Helper
 
+[adventofbadcode.com](adventofbadcode.com)
+
 This project provide a few features for improving user experience in [Leetcode](https://leetcode.com/)
 
 - Provide an interactive frontend for different querying options, including some features that does not support by [Leetcode](https://leetcode.com/), such as acceptance filter and arrow button for displaying tags
@@ -19,4 +21,11 @@ This project provide a few features for improving user experience in [Leetcode](
 * [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) - frontend test
 * [Jest](https://jestjs.io/) - frontend and backend test
 * [Docker](https://www.docker.com/) - deployment
-* [DigitalOcean](https://www.digitalocean.com//) - Virtual private server
+* [Oracle Cloud](https://www.oracle.com/cloud/) - Virtual private server
+
+
+## Improvements
+
+* SSL certificate
+
+
