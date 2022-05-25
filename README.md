@@ -14,18 +14,13 @@ This project provide a few features for improving user experience in [Leetcode](
 
 * [React](https://zh-hant.reactjs.org/) - Frontend framework
 * [MUI](https://mui.com/) - Frontend styling
-* [Mongoose](https://mongoosejs.com/) - backend database
-* [Express](https://expressjs.com/) - backend server
+* [Mongoose](https://mongoosejs.com/) - Backend database
+* [Express](https://expressjs.com/) - Backend server
 * [Github Actions](https://github.com/features/actions) - CI/CD
 * [Supertest](https://github.com/visionmedia/supertest) - Backend API test
 * [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) - frontend test
-* [Jest](https://jestjs.io/) - frontend and backend test
+* [Jest](https://jestjs.io/) - Frontend and Backend test
 * [Docker](https://www.docker.com/) - deployment
 * [Oracle Cloud](https://www.oracle.com/cloud/) - Virtual private server
-
-
-## Improvements
-
-* SSL certificate
-
+* [NGINX](https://nginx.org/en/): Web Server, Reverse Proxy, HTTPS
 
