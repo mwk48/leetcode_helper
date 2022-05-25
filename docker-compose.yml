@@ -38,7 +38,7 @@ services:
       - 80:80
       - 443:443
     container_name: reverse-proxy
-    #depends_on: [leetcode_backend, leetcode_frontend]
+    depends_on: [leetcode_backend, leetcode_frontend]
   certbot:
     image: certbot/certbot:latest
     volumes:
