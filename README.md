@@ -1,6 +1,6 @@
 # Leetcode Helper
 
-[adventofbadcode.com](adventofbadcode.com)
+[adventofbadcode.com](https://adventofbadcode.com)
 
 This project provide a few features for improving user experience in [Leetcode](https://leetcode.com/)
 
