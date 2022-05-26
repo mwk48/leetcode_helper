@@ -22,5 +22,5 @@ This project provide a few features for improving user experience in [Leetcode](
 * [Jest](https://jestjs.io/) - Frontend and Backend test
 * [Docker](https://www.docker.com/) - deployment
 * [Oracle Cloud](https://www.oracle.com/cloud/) - Virtual private server
-* [NGINX](https://nginx.org/en/): Web Server, Reverse Proxy, HTTPS
+* [NGINX](https://nginx.org/en/) - Web Server, Reverse Proxy, HTTPS
 
