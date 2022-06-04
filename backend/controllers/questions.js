@@ -31,6 +31,18 @@ questionRouter.get("/dbid/:id", async (req, res) => {
     }
 });
 
+questionRouter.delete("/qid/:id", async (req, res) => {
+    const id = Number(req.params.id);
+    const result = await Question.findOne({"questionId": id});
+    if (result) {
+        await Question.deleteOne({"questionId": id});
+        //console.log(result);
+        res.status(200).json({ message: "Question deleted" });
+    } else {
+        res.status(404).json({ error: "Invalid question id" });
+    }
+});
+
 questionRouter.get("/count", async (req, res) => {
     const result = await Question.countDocuments({}).exec();
     res.json({count: result});

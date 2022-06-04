@@ -2,3 +2,6 @@ GET http://localhost:3001/api/questions
 
 ###
 GET http://localhost:3001/api/questions/ids
+
+###
+DELETE  http://localhost:3001/api/questions/qid/2290
